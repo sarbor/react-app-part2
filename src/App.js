@@ -28,12 +28,29 @@ class App extends Component {
     });
  }
 
+ // axios.delete(endpoint, { data: bucket_config })
+ //          .then(response => response.data)
+ //          .catch((error) => {
+ //            throw error.response.data
+ //          })
+
   removeCharacter = index => {
     const { characters } = this.state
 
     this.setState({
       characters: characters.filter((character, i) => {
-        return i !== index
+         if(i === index){
+            axios.delete('http://localhost:5000/users/' + character.id)
+              .then(response => response.data)
+                .catch((error) => {
+                  throw error.response.data
+                });
+
+            return false;
+         }
+         else{
+            return true;
+         }
       }),
     })
   }
