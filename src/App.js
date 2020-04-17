@@ -41,12 +41,12 @@ class App extends Component {
       characters: characters.filter((character, i) => {
          if(i === index){
             axios.delete('http://localhost:5000/users/' + character.id)
-              .then(response => response.data)
+              .then(function (response){
+                return response.success;
+              })
                 .catch((error) => {
                   throw error.response.data
                 });
-
-            return false;
          }
          else{
             return true;
